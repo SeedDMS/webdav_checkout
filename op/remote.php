@@ -4,6 +4,7 @@ if(!empty($_SERVER['SEEDDMS_HOME']))
 else
 	require_once("../../../inc/inc.Settings.php");
 
+require_once("inc/inc.LogInit.php");
 require_once("inc/inc.Init.php");
 require_once("inc/inc.DBInit.php");
 
@@ -20,7 +21,7 @@ date_default_timezone_set('Europe/Berlin');
  * The dav server treats everything after the base uri as the
  * name of the requested file
  */
-if(!empty($settings->_extensions['webdav_checkout']['baseuri']))
+if(empty($settings->_extensions['webdav_checkout']['baseuri']))
 	$baseUri = '/checkout';
 else
 	$baseUri = ($settings->_extensions['webdav_checkout']['baseuri'][0] != '/' ? '/' : '').$settings->_extensions['webdav_checkout']['baseuri'];
