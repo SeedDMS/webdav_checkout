@@ -4,7 +4,7 @@ $EXT_CONF['webdav_checkout'] = array(
 	'description' => "This extension provides access through WebDAV for the user's checkout area",
 	'disable' => false,
 	'version' => '1.0.0',
-	'releasedate' => '2022-05-17',
+	'releasedate' => '2022-11-09',
 	'author' => array('name'=>'Uwe Steinmann', 'email'=>'uwe@steinmann.cx', 'company'=>'MMK GmbH'),
 	'config' => array(
 		'browsermode' => array(
