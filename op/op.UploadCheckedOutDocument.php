@@ -56,6 +56,7 @@ if($infos) {
 			if ($_FILES["checkoutfile"]["size"]==0) {
 				UI::exitError(getMLText("document_title", array("documentname" => $document->getName())),getMLText("uploading_zerosize"));
 			}
+			$maxuploadsize = SeedDMS_Core_File::parse_filesize($settings->_maxUploadSize);
 			if ($maxuploadsize && $_FILES["checkoutfile"]["size"] > $maxuploadsize) {
 				UI::exitError(getMLText("folder_title", array("documentname" => $document->getName())),getMLText("uploading_maxsize"));
 			}
