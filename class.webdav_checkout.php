@@ -103,10 +103,13 @@ class SeedDMS_ExtWebdavCheckout_ViewDocument { /* {{{ */
 			$info = $infos[0];
 			$checkoutuser = $dms->getUser($info['userID']);
 			$html .= "<div class=\"alert alert-info\">";
-			if($checkoutstatus != 1)
-				$html .= '<a href="'.$settings->_httpRoot.'ext/webdav_checkout/op/op.DownloadCheckedOutDocument.php?documentid='.$document->getID().'&version='.$info['version'].'" target="webdav"><i class="fa fa-download"></i> '.getMLText("webdav_checkout_download").'</a>';
-			if(!empty($settings->_extensions['webdav_checkout']['allow_upload'])) {
-				$html .= '<br /><form action="'.$settings->_httpRoot.'ext/webdav_checkout/op/op.UploadCheckedOutDocument.php" enctype="multipart/form-data" method="post"><input type="hidden" name="documentid" value="'.$document->getID().'"><input type="hidden" name="version" value="'.$info['version'].'">'.$view->getFileChooserHtml('checkoutfile', false).'<br><button class="btn btn-primary" type="submit">Upload</button></form>';
+			if($checkoutstatus != 1) {
+				if(!empty($settings->_extensions['webdav_checkout']['allow_download'])) {
+					$html .= '<p><a href="'.$settings->_httpRoot.'ext/webdav_checkout/op/op.DownloadCheckedOutDocument.php?documentid='.$document->getID().'&version='.$info['version'].'" target="webdav"><i class="fa fa-download"></i> '.getMLText("webdav_checkout_download").'</a></p>';
+				}
+				if(!empty($settings->_extensions['webdav_checkout']['allow_upload'])) {
+					$html .= '<p><form action="'.$settings->_httpRoot.'ext/webdav_checkout/op/op.UploadCheckedOutDocument.php" enctype="multipart/form-data" method="post"><input type="hidden" name="documentid" value="'.$document->getID().'"><input type="hidden" name="version" value="'.$info['version'].'">'.$view->getFileChooserHtml('checkoutfile', false).'<br><button class="btn btn-primary" type="submit">'.getMLText('webdav_checkout_upload').'</button></form></p>';
+				}
 			}
 			$html .= "</div>";
 		}
