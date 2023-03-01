@@ -16,3 +16,13 @@ desired value.
 
 Any user uses the same url (https://your-domain/checkout) but will
 see only its own check out space.
+
+Accessing the check out space
+------------------------------
+
+If access by WebDAV is not possible, e.g. because you are working at
+a computer without the required network drive, there is another way
+to access a checked out file. If turned on in the configuration of
+this extension, a currently checked out file can be downloaded to
+your local disc and a file from your local disc can be uploaded
+to replace the checked out file. 
