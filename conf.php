@@ -3,13 +3,23 @@ $EXT_CONF['webdav_checkout'] = array(
 	'title' => 'WebDAV server for checkout directory',
 	'description' => "This extension provides access through WebDAV for the user's checkout area",
 	'disable' => false,
-	'version' => '1.0.0',
-	'releasedate' => '2022-11-09',
+	'version' => '1.1.0',
+	'releasedate' => '2023-03-01',
 	'author' => array('name'=>'Uwe Steinmann', 'email'=>'uwe@steinmann.cx', 'company'=>'MMK GmbH'),
 	'config' => array(
 		'browsermode' => array(
 			'title'=>'Allow access with browser',
 			'help'=>'Enable this to generate HTML indexes and debug information for your sabre/dav server.',
+			'type'=>'checkbox',
+		),
+		'allow_download' => array(
+			'title'=>'Allow download of checked out file',
+			'help'=>'Enable this to allow downloading a checked out file from the checkout area.',
+			'type'=>'checkbox',
+		),
+		'allow_upload' => array(
+			'title'=>'Allow upload of file',
+			'help'=>'Enable this to allow uploading a new file which overrides the checked out file in the checkout area.',
 			'type'=>'checkbox',
 		),
 		'baseuri' => array(
@@ -23,10 +33,10 @@ $EXT_CONF['webdav_checkout'] = array(
 	),
 	'icon' => 'icon.svg',
 	'changelog' => 'changelog.md',
-//	'class' => array(
-//		'file' => 'class.calcarddav_server.php',
-//		'name' => 'SeedDMS_ExtCalCardDavServer'
-//	),
+	'class' => array(
+		'file' => 'class.webdav_checkout.php',
+		'name' => 'SeedDMS_ExtWebdavCheckout'
+	),
 	'language' => array(
 		'file' => 'lang.php',
 	),
