@@ -29,7 +29,7 @@ $EXT_CONF['webdav_checkout'] = array(
 		),
 	),
 	'constraints' => array(
-		'depends' => array('php' => '5.6.40-', 'seeddms' => array('5.1.23-5.1.99', '6.0.16-6.0.99')),
+		'depends' => array('php' => '7.4.0-', 'seeddms' => array('5.1.23-5.1.99', '6.0.16-6.0.99')),
 	),
 	'icon' => 'icon.svg',
 	'changelog' => 'changelog.md',
