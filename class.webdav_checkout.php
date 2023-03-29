@@ -29,7 +29,7 @@
  * @package SeedDMS
  * @subpackage  webdav_checkout
  */
-class SeedDMS_ExtWebdavCheckout extends SeedDMS_ExtBase {
+class SeedDMS_ExtWebdavCheckout extends SeedDMS_ExtBase { /* {{{ */
 
 	/**
 	 * Initialization
@@ -48,14 +48,14 @@ class SeedDMS_ExtWebdavCheckout extends SeedDMS_ExtBase {
 
 	function main() { /* {{{ */
 	} /* }}} */
-}
+} /* }}} */
 
 /**
  * Class containing methods for hooks when a html page is started
  *
  * @author  Uwe Steinmann <uwe@steinmann.cx>
  * @package SeedDMS
- * @subpackage motd
+ * @subpackage webdav_checkout
  */
 class SeedDMS_ExtWebdavCheckout_Main { /* {{{ */
 	/**
@@ -71,6 +71,7 @@ class SeedDMS_ExtWebdavCheckout_Main { /* {{{ */
 	} /* }}} */
 
 } /* }}} */
+
 /**
  * Class containing methods for hooks when a document is added
  *
