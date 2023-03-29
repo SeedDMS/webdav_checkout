@@ -11,8 +11,12 @@ You will need to add an alias to your apache configuration
 Replace `<document root>` with the location of your SeedDMS installation.
 
 If you like to change `/checkout` to something different, you will
-also have to set the base Uri in the extension's configuration to your
+also have to set the base uri in the extension's configuration to your
 desired value.
+
+If you cannot set an Alias, then set the base uri to the whole path of
+`/ext/webdav_checkout/op/remote.php`. Technically this is just fine,
+if you don't mind the rather long url.
 
 All users use the same url (e.g. https://your-domain/checkout), but
 will see only its own check out space.
