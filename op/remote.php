@@ -17,7 +17,7 @@ date_default_timezone_set('Europe/Berlin');
 /* The baseUri is what will be entered in the dav client. This is either the
  * path of this file or an alias set up in the apache config. The prefered
  * method is to set up an alias
- * Alias /checkout /home/www-data/seeddms/fs/fileserver.php
+ * Alias /checkout /home/www-data/seeddms/www/ext/webdav_checkout/op/remote.php
  * The dav server treats everything after the base uri as the
  * name of the requested file
  */
