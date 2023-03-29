@@ -87,12 +87,13 @@ class SeedDMS_ExtWebdavCheckout_ViewDocument { /* {{{ */
 		$dms = $view->getParam('dms');
 		$user = $view->getParam('user');
 		$settings = $view->getParam('settings');
+		$config = $settings->_extensions['webdav_checkout'];
 
-		/* Do not show checkout info to user if coolwѕd isn't set */
-		if(empty($settings->_extensions['webdav_checkout']['allow_download']) && empty($settings->_extensions['webdav_checkout']['allow_upload']))
+		/* Do not show download option to users if turned off in configuration */
+		if(empty($config['allow_download']) && empty($config['allow_upload']))
 			return null;
 
-		/* Do not show checkout info to user without write access */
+		/* Do not show download option to users without write access */
 		if($document->getAccessMode($user) <= M_READ)
 			return null;
 
@@ -102,16 +103,20 @@ class SeedDMS_ExtWebdavCheckout_ViewDocument { /* {{{ */
 			$checkoutstatus = $document->checkOutStatus();
 			$info = $infos[0];
 			$checkoutuser = $dms->getUser($info['userID']);
-			$html .= "<div class=\"alert alert-info\">";
-			if($checkoutstatus != 1) {
-				if(!empty($settings->_extensions['webdav_checkout']['allow_download'])) {
-					$html .= '<p><a href="'.$settings->_httpRoot.'ext/webdav_checkout/op/op.DownloadCheckedOutDocument.php?documentid='.$document->getID().'&version='.$info['version'].'" target="webdav"><i class="fa fa-download"></i> '.getMLText("webdav_checkout_download").'</a></p>';
+			$allowdownload = !empty($config['allow_download']) && (!empty($config['allow_download_by_any']) || ($checkoutuser->getId() == $user->getId()));
+			$allowupload = !empty($config['allow_upload']) && (!empty($config['allow_upload_by_any']) || ($checkoutuser->getId() == $user->getId()));
+			if($allowdownload || $allowupload) {
+				$html .= "<div class=\"alert alert-info\">";
+				if($checkoutstatus != 1) {
+					if($allowdownload) {
+						$html .= '<p><a href="'.$settings->_httpRoot.'ext/webdav_checkout/op/op.DownloadCheckedOutDocument.php?documentid='.$document->getID().'&version='.$info['version'].'" target="webdav"><i class="fa fa-download"></i> '.getMLText("webdav_checkout_download").'</a></p>';
+					}
+					if($allowupload) {
+						$html .= '<p><form action="'.$settings->_httpRoot.'ext/webdav_checkout/op/op.UploadCheckedOutDocument.php" enctype="multipart/form-data" method="post"><input type="hidden" name="documentid" value="'.$document->getID().'"><input type="hidden" name="version" value="'.$info['version'].'">'.$view->getFileChooserHtml('checkoutfile', false).'<br><button class="btn btn-primary" type="submit">'.getMLText('webdav_checkout_upload').'</button></form></p>';
+					}
 				}
-				if(!empty($settings->_extensions['webdav_checkout']['allow_upload'])) {
-					$html .= '<p><form action="'.$settings->_httpRoot.'ext/webdav_checkout/op/op.UploadCheckedOutDocument.php" enctype="multipart/form-data" method="post"><input type="hidden" name="documentid" value="'.$document->getID().'"><input type="hidden" name="version" value="'.$info['version'].'">'.$view->getFileChooserHtml('checkoutfile', false).'<br><button class="btn btn-primary" type="submit">'.getMLText('webdav_checkout_upload').'</button></form></p>';
-				}
+				$html .= "</div>";
 			}
-			$html .= "</div>";
 		}
 		return $html;
 	} /* }}} */

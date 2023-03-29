@@ -17,9 +17,19 @@ $EXT_CONF['webdav_checkout'] = array(
 			'help'=>'Enable this to allow downloading a checked out file from the checkout area.',
 			'type'=>'checkbox',
 		),
+		'allow_download_by_any' => array(
+			'title'=>'Allow download by any user',
+			'help'=>'Enable this to allow downloading a checked out file by all users with write access on the document.',
+			'type'=>'checkbox',
+		),
 		'allow_upload' => array(
 			'title'=>'Allow upload of file',
-			'help'=>'Enable this to allow uploading a new file which overrides the checked out file in the checkout area.',
+			'help'=>'Enable this to allow uploading a new file into the checkout area. This overwrites the checked out file in the checkout area.',
+			'type'=>'checkbox',
+		),
+		'allow_upload_by_any' => array(
+			'title'=>'Allow upload by any user',
+			'help'=>'Enable this to allow uploading a new file by any user with write access on the document. This overwrites the checked out file in the checkout area.',
 			'type'=>'checkbox',
 		),
 		'baseuri' => array(
