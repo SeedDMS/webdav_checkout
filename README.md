@@ -21,6 +21,13 @@ if you don't mind the rather long url.
 All users use the same url (e.g. https://your-domain/checkout), but
 will see only its own check out space.
 
+In case you use php-fpm you will probably need
+
+    SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
+
+in your apache configuration, otherwise the authentication will fail,
+because the proxy mode will swallow the Authorization header.
+
 Accessing the check out space
 ------------------------------
 
