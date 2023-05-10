@@ -1,3 +1,8 @@
+Changes in version 1.1.2
+==========================
+
+- log authentication problems
+
 Changes in version 1.1.1
 ==========================
 
