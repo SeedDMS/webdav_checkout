@@ -33,12 +33,17 @@ $tmpDir = $publicDir.'/.tmpdata';
 $user = null;
 
 function checkuser($username, $pass) { /* {{{ */
-	global $dms, $settings, $user, $server, $baseUri;
+	global $dms, $settings, $user, $server, $baseUri, $logger;
+	$logger->log('\'webdav_checkout\': login in as user \''.$username.'\'', PEAR_LOG_INFO);
 	$userobj = $dms->getUserByLogin($username);
-	if(!$userobj)
+	if(!$userobj) {
+		$logger->log('\'webdav_checkout\': no such user', PEAR_LOG_ERR);
 		return false;
-	if(md5($pass) != $userobj->getPwd())
+	}
+	if(md5($pass) != $userobj->getPwd()) {
+		$logger->log('\'webdav_checkout\': wrong password', PEAR_LOG_ERR);
 		return false;
+	}
 
 	$user = $userobj;
 	$rootdir = sprintf($settings->_checkOutDir.'/', preg_replace('/[^A-Za-z0-9_-]/', '', $user->getLogin()));
