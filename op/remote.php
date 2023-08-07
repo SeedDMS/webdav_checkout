@@ -6,6 +6,7 @@ else
 
 require_once("inc/inc.LogInit.php");
 require_once("inc/inc.Init.php");
+require_once("inc/inc.Extension.php");
 require_once("inc/inc.DBInit.php");
 
 // Include SabreDAV
@@ -33,14 +34,15 @@ $tmpDir = $publicDir.'/.tmpdata';
 $user = null;
 
 function checkuser($username, $pass) { /* {{{ */
-	global $dms, $settings, $user, $server, $baseUri, $logger;
+	global $dms, $settings, $user, $server, $baseUri, $logger, $authenticator;
 	$logger->log('\'webdav_checkout\': login in as user \''.$username.'\'', PEAR_LOG_INFO);
 	$userobj = $dms->getUserByLogin($username);
 	if(!$userobj) {
 		$logger->log('\'webdav_checkout\': no such user', PEAR_LOG_ERR);
 		return false;
 	}
-	if(md5($pass) != $userobj->getPwd()) {
+	$userobj = $authenticator->authenticate($username, $pass);
+	if(!is_object($userobj)) {
 		$logger->log('\'webdav_checkout\': wrong password', PEAR_LOG_ERR);
 		return false;
 	}

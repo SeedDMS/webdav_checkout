@@ -1,3 +1,8 @@
+Changes in version 1.1.3
+==========================
+
+- use authenticator instead of comparing passwords
+
 Changes in version 1.1.2
 ==========================
 
